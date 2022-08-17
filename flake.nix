@@ -70,7 +70,7 @@
           ];
 
           installPhase = ''
-            install -m755 -D ${./peerconnection_client} $out/bin/peerconnection_client
+            install -m755 -D ${./peerconnection_client_} $out/bin/peerconnection_client
           '';
         };
 
@@ -88,7 +88,7 @@
           ];
 
           installPhase = ''
-            install -m755 -D ${./peerconnection_server} $out/bin/peerconnection_server
+            install -m755 -D ${./peerconnection_server_} $out/bin/peerconnection_server
           '';
         };
 
@@ -157,7 +157,7 @@
           DOTNET_SYSTEM_GLOBALIZATION_INVARIANT = 1;
           DOTNET_CLI_HOME = "/tmp/dotnet_cli";
           DOTNET_ROOT = "${sdk}";
-          buildInputs = [pkgs.yarn sdk fable pkgs.nodejs-18_x pkgs.dotnetPackages.Paket pkgs.nix];
+          buildInputs = [pkgs.yarn sdk fable pkgs.nodejs-18_x pkgs.nix];
           shellHook = ''
             eval "$(starship init bash)"
           '';
@@ -174,6 +174,9 @@
             name = "build";
             runtimeInputs = devShell.buildInputs;
             text = ''
+              cp peerconnection_client peerconnection_client_
+              cp peerconnection_server peerconnection_server_
+              git add peerconnection_client_ peerconnection_server_
               cd src
               touch AutoWebRTC.fs
               fable precompile lib/lib.fsproj -o lib/precompiled
@@ -183,6 +186,7 @@
               cd ..
               nix build -L
               rm -rf src/built
+              rm peerconnection_client_ peerconnection_server_
             '';
           };
         };
