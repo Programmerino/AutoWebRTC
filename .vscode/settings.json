@@ -1,0 +1,7 @@
+{
+    "nixEnvSelector.nixFile": "${workspaceRoot}/shell.nix",
+    "files.watcherExclude": {
+        "**/target": true
+    },
+    "FSharp.inlayHints.disableLongTooltip": true
+}

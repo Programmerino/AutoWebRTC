@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageId Condition="'$(name)' == ''">AutoWebRTC</PackageId>
+    <PackageId Condition="'$(name)' != ''">$(name)</PackageId>
+    <Version Condition="'$(version)' == ''">0.0.0</Version>
+    <Version Condition="'$(version)' != ''">$(version)</Version>
+    <Authors>Davis Davalos-DeLosh</Authors>
+    <Company>Davis Davalos-DeLosh</Company>
+    <PackageDescription>...</PackageDescription>
+    <RepositoryUrl Condition="'$(name)' == ''">https://github.com/Programmerino/AutoWebRTC</RepositoryUrl>
+    <RepositoryUrl Condition="'$(name)' != ''">https://github.com/Programmerino/$(name)</RepositoryUrl>
+    <TrimmerDefaultAction>link</TrimmerDefaultAction>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="timers.fs" />
+    <Compile Include="commander.fs" />
+    <Compile Include="ssh2.fs" />
+    <Compile Include="node-ssh.fs" />
+    <Compile Include="AutoWebRTC.fs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="lib\lib.fsproj" />
+  </ItemGroup>
+</Project> 
